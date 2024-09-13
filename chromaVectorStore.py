@@ -1,7 +1,7 @@
-from langchain.vectorstores.chroma import Chroma
+from langchain_chroma import Chroma
 
 import pickle
-from langchain.schema.document import Document
+from langchain_core.documents import Document
 
 from workspace.embeddingSetup import EmbeddingLoader
 from workspace.mdLoader import BaseDBLoader

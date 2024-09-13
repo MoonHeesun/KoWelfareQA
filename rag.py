@@ -5,15 +5,15 @@ import pickle
 from workspace.settings import OPENAI_API_KEY
 from workspace.analogicalPrompt import generateAnalogicalPrompt, get_normal_prompt
 
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
 
-from langchain.schema.runnable import RunnablePassthrough
-from langchain.schema import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 
 from langchain.retrievers import ParentDocumentRetriever
-from langchain.text_splitter import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
-from langchain.vectorstores.chroma import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
+from langchain_chroma import Chroma
 from langchain.storage import LocalFileStore
 from langchain.storage._lc_store import create_kv_docstore
 
