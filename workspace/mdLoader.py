@@ -8,9 +8,9 @@ import pandas as pd
 import numpy as np
 import json
 
-from langchain.document_loaders import DirectoryLoader, UnstructuredMarkdownLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
-from langchain.schema.document import Document
+from langchain_community.document_loaders import DirectoryLoader, UnstructuredMarkdownLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
+from langchain_core.documents import Document
 
 from datetime import datetime
 
@@ -23,7 +23,7 @@ class BaseDBLoader:
         # textsplitter config
         self.child_splitter = SentenceTransformersTokenTextSplitter(
             tokens_per_chunk=128,
-            model_name="workspace/model/jhgan_seed_777_lr_1e-5_final",
+            model_name="BM-K/KoSimCSE-roberta-multitask",
             # model_name="workspace/model/dadt_epoch2_kha_tok",
             chunk_overlap=10,
         )

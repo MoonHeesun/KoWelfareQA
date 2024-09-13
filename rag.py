@@ -5,15 +5,16 @@ import pickle
 from workspace.settings import OPENAI_API_KEY
 from workspace.analogicalPrompt import generateAnalogicalPrompt, get_normal_prompt
 
-from langchain.chat_models import ChatOpenAI
-from langchain.retrievers import BM25Retriever, EnsembleRetriever
+from langchain_openai import ChatOpenAI
+from langchain.retrievers import EnsembleRetriever
+from langchain_community.retrievers import BM25Retriever
 
-from langchain.schema.runnable import RunnablePassthrough
-from langchain.schema import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 
 from langchain.retrievers import ParentDocumentRetriever
-from langchain.text_splitter import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
-from langchain.vectorstores.chroma import Chroma
+from langchain_text_splitters import RecursiveCharacterTextSplitter, SentenceTransformersTokenTextSplitter
+from langchain_chroma import Chroma
 from langchain.storage import LocalFileStore
 from langchain.storage._lc_store import create_kv_docstore
 
@@ -43,7 +44,7 @@ class RAGPipeline:
 
         child_splitter = SentenceTransformersTokenTextSplitter(
             tokens_per_chunk=128,
-            model_name="workspace/model/jhgan_seed_777_lr_1e-5_final",
+            model_name="BM-K/KoSimCSE-roberta-multitask",
             # model_name="workspace/model/dadt_epoch2_kha_tok",
             chunk_overlap=10,
         )
@@ -80,7 +81,7 @@ class RAGPipeline:
 
     # $$$ BM25 parsing
     def bm_parse(self, text:str) -> list[str]:
-        tokenizer_base = AutoTokenizer.from_pretrained("workspace/model/dadt_epoch2_kha_tok")
+        tokenizer_base = AutoTokenizer.from_pretrained("BM-K/KoSimCSE-roberta-multitask")
         tokenized_list = [tok.replace("##", "") for tok in tokenizer_base.tokenize(text)]
         return tokenized_list
 
