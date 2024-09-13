@@ -3,8 +3,7 @@
 import os
 import torch
 
-from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings as STE
-
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from sentence_transformers import SentenceTransformer
 
 
@@ -20,8 +19,8 @@ class EmbeddingLoader:
         self.kwargs = kwargs
         return
 
-    def load(self) -> STE:
-        embedding = STE(**self.kwargs)
+    def load(self):
+        embedding = HuggingFaceEmbeddings(**self.kwargs)
         return embedding
     
     def _device_check(self) -> str: 
@@ -56,4 +55,4 @@ def s_bert_embedding_donwloader(model_name, save_path):
 
 if __name__ == "__main__" :
     # setup = EmbeddingLoader(from_default_template=False, model_name="workspace/dadt_epoch2_kha_tok", encode_kwargs = {'normalize_embeddings': True}).load()
-    setup = EmbeddingLoader(model_name="workspace/dadt_epoch2_kha_tok", encode_kwargs = {'normalize_embeddings': True})
+    setup = EmbeddingLoader(model_name="BM-K/KoSimCSE-roberta-multitask", encode_kwargs = {'normalize_embeddings': True})

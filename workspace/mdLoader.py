@@ -23,7 +23,7 @@ class BaseDBLoader:
         # textsplitter config
         self.child_splitter = SentenceTransformersTokenTextSplitter(
             tokens_per_chunk=128,
-            model_name="workspace/model/jhgan_seed_777_lr_1e-5_final",
+            model_name="BM-K/KoSimCSE-roberta-multitask",
             # model_name="workspace/model/dadt_epoch2_kha_tok",
             chunk_overlap=10,
         )
